@@ -1,0 +1,400 @@
+33 Concept Javascript
+
+Intoduction
+
+JavaScript is a single-threaded programming language, which means it has a single Call Stack.meaning only one task can be executed at a time.it process line by line
+
+ Javascript engine adds all line in call stack and executed it in LIFO method (Last in First Out). In short call stack is a data structure that records and identifies where we are in the program.
+
+1. Call Stack
+
+
+A.Code store in memory
+1.call stack. (function to execute)(Each entry in the Call Stack is called a Stack Frame.)
+2.heap(Objects are allocated in a heap)
+3.Queue(message queue..these messages are queued in response to external async events(such as a mouse being clicked or receiving the response to an HTTP request), given a callback function has been provided)
+Note:one thread ==one call stack == one thing at a time
+B.Event Loop
+1.single threaded language like Javascript, this is not possible unless function inside the stack returns a value
+Solution:
+Event Loop: Event Loop is what allows JavaScript to use callbacks and promises
+The easiest solution is by using asynchronous callbacks, which means that we run some part of code and give it a callback (function) which will execute later
+Node is all about asynchronous function execution
+
+
+C:V8 Engine
+ introduction
+
+V8 was first designed to increase the performance of JavaScript execution inside web browser
+v8 engine doesnt uses any interpreter to compile the code it It compiles JavaScript code into machine code at execution by implementing a JIT (Just-In-Time) compiler like a lot of modern JavaScript engines do such as SpiderMonkey or Rhino (Mozilla)
+The V8 engine is used inside Chrome and Node.js 
+The Chrome V8 engine :
+
+    The V8 engine is written in C++ and used in Chrome and Nodejs.
+    It implements ECMAScript as specified in ECMA-262.
+    The V8 engine can run standalone we can embed it with our own C++ program
+The Engine consists of two main components:
+* Memory Heap — this is where the memory allocation happens
+* Call Stack — this is where your stack frames are as your code executes
+
+
+D:Excution
+The first Execution Context that gets created when the JavaScript engine runs your code is called the “Global Execution Context”. Initially this Execution Context will consist of two things - a global object and a variable called this.
+
+
+E:Hosting
+
+This process of assigning variable declarations a default value of undefined during the creation phase is called Hoisting.
+Hoisting refers to the availability of functions and variables “at the top” of your code, as opposed to only after they are created. The objects are initialized at compile time and available anywhere in your file.
+
+
+F:
+1:Global Creation phase, the JavaScript engine will
+
+    Create a global object.
+    Create an object called “this”.
+    Set up memory space for variables and functions.
+    Assign variable declarations a default value of “undefined” while placing any function declarations in memory.
+
+2:Function Execution Context is created, the JavaScript engine will
+
+    1. Create a global object.
+    1. Create an arguments object.
+    2. Create an object called this.
+    3. Set up memory space for variables and functions.
+    4. Assign variable declarations a default value of “undefined” while placing any function declarations in memory. 
+3:Scope
+
+Scope 2 in js
+1.Global level Scope
+2.function level scope(inside function)(var)
+3.block level scope(inside if block once done it remove from memory)(let(resign value) & const(cannot resign value))
+
+
+2. Primitive Types
+
+typeOf of variable 
+
+Primitive values vs reference values 
+Introduction:
+Primitive values/value Type
+1.they are immutable
+2.store at stack
+3.Primitives are copied by their value
+4.String,number,boolean,undefined,Null,Symbol
+5.ex:(var x=10,var y=x)
+
+3. Value Types and Reference Types
+
+Reference value
+1.Object,Array,function
+2.store at Heap
+3.they are copied by their reference
+4.ex:(let x= {value:10};let y=x;x.value=20)
+
+
+
+4. Implicit, Explicit, Nominal, Structuring and Duck Typing
+G:Coercion
+Type convertion
+
+As Javascript has in build type convertion so when string where it expects a number, an object where it expects a string etc and it will try to convert it to the right type
+
+Type Error
+
+Build function
+1.typeof (return String indicating type)
+2.Dyanmic vs static or weak vs strong
+3.Static typing (check type or error at compile time )(before running program)(java,c#)
+4.Dynamic (check type or error at dyanmic time )(while running program)(js,ruby,php)
+5.js is weakly type language
+ex:Implicit conversion
+1 4+'7'='47'
+2 4 * '7'=28
+3 2 + true = 3
+4 false -3 =-3
+
+
+5. == vs === vs typeof
+H:==vs ===vstypeof
+
+Triple Equals
+1: the type and the value we are comparing have to be the same.
+2:ex 5 === 5 // true
+'hello world' === 'hello world'
+// true (Both Strings, equal values)
+
+Double equals
+
+1.Double equals performs type coercion.
+2.Type coercion means that two values are compared only after attempting to convert them into a common type.
+3.ex:77 == '77'
+// true
+4.NaN is not equivalent to anything
+NaN == null
+// false
+NaN == undefined
+// false
+
+NaN == NaN
+// false
+
+6. Function Scope, Block Scope and Lexical Scope
+I:Function Scope, Block Scope and Lexical Scope
+scope === variable access
+context === this
+two main scope 
+1.global scope
+2.local scope
+3.var — function scope(var is not limited to the curly brackets. It is the function which defines the scope.Function scope is within the function)
+4.let and const — the introduction of block scope(Block scope is within curly brackets)
+
+77 === '77'
+// false (Number v. String)
+drawback
+typeof(null) return object
+
+7. Expression vs Statement
+
+
+J:Expression vs Statement
+1.Expression produce value(new Date(),[1,2,3])
+2.statment produce behaviour(block of code)
+3.express statement
+
+Function Expression
+
+alert(foo()); // ERROR! foo wasn't loaded yet
+var foo = function() { return 5; }
+
+Function Declaration
+
+alert(foo()); // Alerts 5. Declarations are loaded before any code can run.
+function foo() { return 5; }
+
+Function declarations load before any code is executed while Function expressions load only when the interpreter reaches that line of code.
+
+
+Define a Function.
+
+There are a few different ways to define a function in JavaScript
+
+function name(parameters){
+  statements
+}
+
+let name = function(parameters){
+  statements
+}
+let name = (parameters) => {
+  statements
+}
+Every function in JavaScript returns undefined unless otherwise specified.
+
+Functions always return a value. In JavaScript, if no return value is specified, the function will return undefined by default.
+
+Functions are objects.
+
+
+8. IIFE, Modules and Namespaces
+
+Revealing Module pattern
+1.singleton(singleton.sayHello())
+2.constructor function(var module = new Module(),module.sayHello(); )
+
+Module formats
+
+
+A module format is the syntax we can use to define a module.
+
+
+    Asynchronous Module Definition (AMD)(define function to define modules define(['dep1', 'dep2'], function (dep1, dep2) {//Define the module value by returning a value.return function () {};});)
+    CommonJS(uses require and module.exports :var dep1 = require('./dep1'),
+module.exports = function(){  
+  // ...
+} )
+    Universal Module Definition (UMD)((funtion hellow(){}))
+    System.register(import { p as q } from './dep'; export function func() {  
+  return q;
+}
+
+export class C {  
+})
+    ES6 module format (As of ES6, JavaScript also supports a native module format export function sayHello(){  
+  console.log('Hello');
+})import { sayHello } from './lib';
+
+sayHello();
+
+
+Module loaders
+A module loader interprets and loads a module written in a certain module format.
+A module loader interprets and loads a module written in a certain module format at runtime. Popular examples are RequireJS and SystemJS.
+A few examples of popular module loaders are:
+    RequireJS: loader for modules in AMD format
+    SystemJS: loader for modules in AMD, CommonJS, UMD or System.register format
+
+
+Module bundlers
+A module bundler replaces a module loader and generates a bundle of all code at build time. Popular examples are Browserify and Webpack.
+
+A module bundler replaces a module loader.
+    babel/Browserify: bundler for CommonJS modules
+    Webpack: bundler for AMD, CommonJS, ES6 modules
+
+I/O Blocking 
+
+you cannot wait for something to happen because that would block the whole thread. Instead you define a callback that is called once the action is complete. This is usually referred to as non-blocking I/O.
+
+db_query(‘SELECT * FROM users’, function (row) {
+
+print(row);
+
+});
+
+print(‘It will print before user result print’)
+
+Event Loop
+
+the Event Loop is what allows JavaScript to use callbacks and promises
+
+The event loop continuously checks the call stack to see if there’s any function that needs to run.
+
+While doing so, it adds any function call it finds to the call stack and executes each one in order.
+
+10. setTimeout, setInterval and requestAnimationFrame
+
+
+ execute a function not right now, but at a certain time later. That’s called “scheduling a call”.
+
+There are two methods for it:
+
+    setTimeout allows to run a function once after the interval of time.
+    setInterval allows to run a function regularly with the interval between the runs.
+
+11. JavaScript Engines
+
+V8 is a powerful open source Javascript engine provided by Google.It is a program that converts Javascript code into lower level or machine code that microprocessors can understand.There are different JavaScript engines including Rhino, JavaScriptCore, and SpiderMonkey. These engines follow the ECMAScript Standards. ECMAScript defines the standard for the scripting language
+
+
+14. Factories and Classes
+	1. Constructor Functions
+	Javascript is a functional programming language where everything is just a function
+	function Vehicle(make, model, color) {
+        this.make = make,
+        this.model = model,
+        this.color = color,
+        this.getName = function () {
+            return this.make + " " + this.model;
+        }
+	}
+	let car = new Vehicle("Toyota", "Corolla", "Black");
+	let car2 = new Vehicle("Honda", "Civic", "White");
+
+
+	2. Prototype
+	when function is createdJavascript engine by default adds a prototype property to it, this property is an object and we call it “prototype object” .
+	Vehicle.prototype
+	3. Classes
+	javascript classes are nothing but just a new way of writing the constructor functions by utilizing the power of prototype
+
+	class Vehicle {
+    constructor(make, model, color) {
+        this.make = make;
+        this.model = model;
+        this.color = color;
+    }
+
+    getName() {
+        return this.make + " " + this.model;
+    }
+}
+
+	Class Features
+	1.constructor
+	2.Static Methods
+		Static methods are functions on class itself,
+	let car = new Vehicle("Honda", "Accord", "Purple");
+	Static methods are declared using static keyword
+	3 Getters/Setters
+	4. Subclassing
+	Subclassing is a way you can implement inheritance in Javascript classes, keyword extends is used to create a child class of a class.
+	class Vehicle {
+    constructor(make, model, color) {
+        this.make = make;
+        this.model = model;
+        this.color = color;
+    }
+
+    getName() {
+        return this.make + " " + this.model;
+    }
+}
+
+class Car extends Vehicle{
+    getName(){
+        return this.make + " " + this.model +" in child class.";
+    }
+}
+
+let car = new Car("Honda", "Accord", "Purple");
+
+car.getName(); // "Honda Accord in child class."
+
+3 conceptual Factory Patterns
+	    1.Simple Factory
+		 1.simple factory is an object which encapsulates the creation of another object denote by new key word
+		
+    	    2.Factory Method
+		2.“Factory Method defines one method, createThing for instance, which is overriden by subclasses who decide what to return.It could be could be implemented extending classes 
+            3.Abstract Factory
+		The Abstract Factory Pattern provides an interface for creating families of related or dependent objects without specifying their 			concrete classes.”
+
+
+Factory design pattern
+const Animal = function(name){
+    const animal = {};
+    animal.name = name;
+    animal.walk = function(){
+        console.log(this.name + " walks");
+    }
+    return animal;
+};
+
+const poo = Animal("poo");
+const tommy = Animal("tommy");
+
+poo.walk() // poo walks
+tommy.walk() // tommy walks
+
+
+15. this, call, apply and bind
+	he this keyword allows you to reuse functions with different contexts
+	1.call() or Function.prototype.call()
+		The call() method calls a function with a given this value and arguments provided individually
+		var obj = {name:"Niladri"};
+		var greeting = function(a,b,c){
+   		 return "welcome "+this.name+" to "+a+" "+b+" in "+c;sssss`
+		};
+
+		console.log(greeting.call(obj,"Newtown","KOLKATA","WB"));
+		
+	2. apply() or Function.prototype.apply()
+		var args = ["Newtown","KOLKATA","WB"];  
+		console.log("Output using .apply() below ")
+		console.log(greeting.apply(obj,args));
+	3. bind() or Function.prototype.bind()
+		var bound = greeting.bind(obj); 
+		console.dir(bound); ///returns a function
+		console.log("Output using .bind() below ");
+		console.log(bound("Newtown","KOLKATA","WB")); //call the bound function
+
+18.Prototypes
+
+Every JavaScript object has a prototype. All objects in JavaScript inherit their methods and properties from their prototypes.]
+
+
+18. Object.create and Object.assign
+
+the important difference that new Dog actually runs constructor code, whereas Object.create will not execute the constructor code.
+	
